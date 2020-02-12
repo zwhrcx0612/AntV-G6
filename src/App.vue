@@ -8,10 +8,10 @@
 import Vue from 'vue'
 import G6 from '@antv/g6'
 import ToolTip from './ToolTip'
-import minimap from '@/utils/MiniMap'
-import grid from '@/utils/Grid'
-import '@/utils/LineDash'
-import '@/utils/CircleRunning'
+import minimap from '@/utils/minimap'
+import grid from '@/utils/grid'
+import '@/utils/line-dash'
+import '@/utils/circle-running'
 export default {
   name: 'App',
   data() {
@@ -26,7 +26,7 @@ export default {
       data: {
         nodes: [
           { id: 'node0', label: '服务器1', x: 100, y: 100, class: 'server', cpu: 2, nem: 2 },
-          { id: 'node1', x: 100, y: 200, class: 'server' },
+          { id: 'node1', x: 100, y: 200, class: 'server', cpu: 2, nem: 3 },
           { id: 'node2', x: 100, y: 300, class: 'server' },
           { id: 'node3', x: 200, y: 200, class: 'server' },
           { id: 'node4', x: 300, y: 200, class: 'cloud' },
@@ -165,6 +165,7 @@ export default {
               console.log('model:', model)
               // model.icon.img = 'http://localhost:8080/images/cloud.png'
               // 提示框文本内容
+
               _this.flag++
               clearInterval(_this.timer)
               _this.timer = setInterval(() => {
@@ -198,6 +199,10 @@ export default {
       // 节点背景图的大小
       node.icon.width = 50
       node.icon.height = 50
+      if (!node.cpu && !node.nem) {
+        this.$set(node, 'cpu', 0)
+        this.$set(node, 'nem', 0)
+      }
       switch (node.class) {
         case 'server': {
           node.shape = 'ellipse'
@@ -261,7 +266,7 @@ export default {
       const item = graph.findById('node0')
       const model = {
         icon: {
-          img: 'images/server_red.svg'
+          img: 'img/server_red.svg'
         }
       }
       // 可以通过下面这个方法改变icon，实现变色的一些功能，

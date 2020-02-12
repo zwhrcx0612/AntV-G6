@@ -2,16 +2,16 @@
   <div class="tooltip-node" style="font-size:12px">
     <div class="nem" style="display:flex">
       <div style="width:40px;text-align:right;height:20px">nem:</div>
-      <el-progress style="width:160px;padding-left:5px" :stroke-width="16" :text-inside="true" :format="format" :color="customColors" :percentage="$root.temp.nem" />
+      <el-progress style="width:160px;padding-left:5px" :stroke-width="16" :text-inside="true" :format="format" :color="customColors" :percentage="nem" />
     </div>
     <div class="cpu" style="display:flex">
       <div style="width:40px;text-align:right;height:20px">cpu:</div>
-      <el-progress style="width:160px;padding-left:5px" :stroke-width="16" :text-inside="true" :format="format" :color="customColors" :percentage="$root.temp.cpu" />
+      <el-progress style="width:160px;padding-left:5px" :stroke-width="16" :text-inside="true" :format="format" :color="customColors" :percentage="cpu" />
     </div>
     <!-- {{ $root.message }} -->
     <!-- 这个去掉之后进度条就不会动态变化了，具体原因未知 -->
     <div style="text-align:center">
-      Incoming: {{ a }}
+      Incoming: 1
 
     </div>
   </div>
@@ -22,7 +22,7 @@ export default {
 
   data() {
     return {
-      a: 1,
+      // a: 1,
       customColors: [
         { color: '#f56c6c', percentage: 20 },
         { color: '#e6a23c', percentage: 40 },
@@ -32,11 +32,19 @@ export default {
       ]
     }
   },
+  computed: {
+    nem() {
+      return this.$root.temp.nem
+    },
+    cpu() {
+      return this.$root.temp.cpu
+    }
+  },
   mounted() {
     // 这个去掉之后进度条就不会动态变化了，具体原因未知
-    setInterval(() => {
-      this.a++
-    }, 2000)
+    // setInterval(() => {
+    //   this.a++
+    // }, 2000)
   },
   methods: {
     format(percentage) {

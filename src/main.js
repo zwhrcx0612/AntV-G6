@@ -4,6 +4,8 @@ import router from './router'
 import store from './store'
 import vSelect from 'vue-select'
 import element from 'element-ui'
+
+// import '@/utils/plugins/grid.js'
 import 'element-ui/lib/theme-chalk/index.css'
 import '@/assets/images/server.svg'
 import '@/assets/images/server_red.svg'
